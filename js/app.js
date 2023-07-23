@@ -7,11 +7,11 @@ const capturedImage = document.getElementById('capturedImage');
 const feedBack = document.getElementById('feedback');
 // Dummy data for demonstration (replace with actual SASL gesture data)
 const saslGestures = [
-  { letter: 'A', imageUrl: 'C:/Users/Teboho Motsamai/Documents/Honours/CSIS6809/SASLHandGestureApp/images/A_HAND.png' },
-  { letter: 'E', imageUrl: 'C:/Users/Teboho Motsamai/Documents/Honours/CSIS6809/SASLHandGestureApp/images/E_HAND.png' },
-  { letter: 'I', imageUrl: 'C:/Users/Teboho Motsamai/Documents/Honours/CSIS6809/SASLHandGestureApp/images/I_HAND.png' },
-  { letter: 'O', imageUrl: 'C:/Users/Teboho Motsamai/Documents/Honours/CSIS6809/SASLHandGestureApp/images/O_HAND.png' },
-  { letter: 'U', imageUrl: 'C:/Users/Teboho Motsamai/Documents/Honours/CSIS6809/SASLHandGestureApp/images/U_HAND.png' },
+  { letter: 'A', imageUrl: 'images/A_HAND.png' },
+  { letter: 'E', imageUrl: 'images/E_HAND.png' },
+  { letter: 'I', imageUrl: 'images/I_HAND.png' },
+  { letter: 'O', imageUrl: 'images/O_HAND.png' },
+  { letter: 'U', imageUrl: 'images/U_HAND.png' },
 
 ];
 
