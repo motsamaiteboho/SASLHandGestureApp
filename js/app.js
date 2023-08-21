@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function loadModel() {
-  const model = await tf.loadLayersModel('https://github.com/motsamaiteboho/SASLHandGestureModel/blob/main/models/cnn_best_model.h5/cnn_best_model.json');
+  const model = await tf.loadLayersModel('http://localhost:3000/get-model');
   return model;
 }
 
