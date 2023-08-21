@@ -28,8 +28,11 @@ function displayRandomGesture() {
 captureBtn.addEventListener('click', () => {
   setTimeout(() => {
     captureImage();
-    setTimeout(() => {
-      feedBack.textContent = "loading accuracy";
+    setTimeout(async () => {
+      const loadedModel = await loadModel();
+      const inputImage = document.getElementById('capturedImage'); // Get input image element
+      const predictions =  await predict(loadedModel, inputImage);
+      feedBack.textContent = predictions;
       displayRandomGesture(); 
     }, 1000);
   }, 1000);
@@ -70,3 +73,27 @@ captureBtn.addEventListener('click', function() {
    
 
 });
+// Load the model once the page is loaded
+document.addEventListener('DOMContentLoaded', async () => {
+  const model = await loadModel();
+  // You can store the model in a global variable or use it as needed
+});
+
+async function loadModel() {
+  const model = await tf.loadLayersModel('https://github.com/motsamaiteboho/SASLHandGestureModel/blob/main/models/cnn_best_model.h5/cnn_best_model.json');
+  return model;
+}
+
+// Preprocess input image
+function preprocessImage(image) {
+  // Resize, normalize, and preprocess image here
+  return preprocessedImage;
+}
+
+// Make predictions
+async function predict(model, inputImage) {
+  const preprocessedImage = preprocessImage(inputImage);
+  const predictions = await model.predict(preprocessedImage).data();;
+  return predictions;
+}
+
