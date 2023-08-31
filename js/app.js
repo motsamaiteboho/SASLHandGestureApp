@@ -69,11 +69,6 @@ function captureImage() {
     capturedImage.style.height = "300px"
 }
 
-// Add click event listener to the capture button
-captureBtn.addEventListener('click', function() {
-   
-
-});
 // Load the model once the page is loaded
 document.addEventListener('DOMContentLoaded', async () => {
   const model = await loadModel();
@@ -81,7 +76,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function loadModel() {
-  const model = await tf.loadLayersModel('http://localhost:3000/get-model').result;
+  const modelConfigURL = 'http://localhost:3000/get-model';
+
+  const response = await fetch(modelConfigURL);
+    const modelConfig = await response.json();
+
+  const model = await tf.loadLayersModel(tf.io.fromJSON(JSON.stringify(modelConfig)));
   //const model = await  tf.loadModel('http://localhost:3000/get-model').result;
  
   return model;
