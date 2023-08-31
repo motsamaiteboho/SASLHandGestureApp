@@ -1,5 +1,6 @@
 // Get elements from the DOM
 //import * as tf from '@tensorflow/tfjs';
+import { loadLayersModel, io } from '@tensorflow/tfjs-node';
 const gestureImage = document.getElementById('gesture-image');
 const captureBtn = document.getElementById('capture-btn');
 const video = document.getElementById('video');
@@ -81,7 +82,7 @@ async function loadModel() {
   const response = await fetch(modelConfigURL);
     const modelConfig = await response.json();
 
-  const model = await tf.loadLayersModel(tf.io.fromJSON(JSON.stringify(modelConfig)));
+  const model = await loadLayersModel(io.fromJSON(JSON.stringify(modelConfig)));
   //const model = await  tf.loadModel('http://localhost:3000/get-model').result;
  
   return model;
