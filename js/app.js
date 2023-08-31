@@ -82,7 +82,7 @@ async function loadModel() {
   const response = await fetch(modelConfigURL);
     const modelConfig = await response.json();
 
-  const model = await tf.loadLayersModel(tf.io.fromJSON(JSON.stringify(modelConfig)));
+  const model = await tf.loadLayersModel(JSON.stringify(modelConfig));
   //const model = await  tf.loadModel('http://localhost:3000/get-model').result;
  
   return model;
