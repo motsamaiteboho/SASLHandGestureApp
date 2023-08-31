@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function loadModel() {
-  //const model = await tf.loadLayersModel('http://localhost:3000/get-model').result;
-  const model = await  tf.loadModel('http://localhost:3000/get-model').result;
+  const model = await tf.loadLayersModel('http://localhost:3000/get-model').result;
+  //const model = await  tf.loadModel('http://localhost:3000/get-model').result;
  
   return model;
 }
