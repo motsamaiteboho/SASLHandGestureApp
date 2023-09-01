@@ -133,9 +133,15 @@ function preprocessImage(image) {
 
 // Function to preprocess an image and make predictions
 async function predict(model, inputImage) {
-  const preprocessedImage = preprocessImage(inputImage);
-  const predictions = await model.predict(preprocessedImage);
-  // Get the class with the highest probability
-  return predictions.argMax(1).dataSync()[0];
+  try {
+    const preprocessedImage = preprocessImage(inputImage);
+    const predictions = await model.predict(preprocessedImage);
+    // Get the class with the highest probability
+    return predictions.argMax(1).dataSync()[0];
+  } catch (error) {
+    console.error('Error in predict function:', error);
+    return null; // Return a placeholder or handle the error gracefully
+  }
 }
+
 
