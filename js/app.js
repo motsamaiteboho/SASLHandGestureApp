@@ -83,13 +83,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadModel() {
   const modelConfigURL = 'http://localhost:3000/get-model';
-    var model = null;
-    tf.ready().then(function () {
-      // Now you can access tf.io
-      model = tf.loadLayersModel(modelConfigURL);
-  });
-  //const model = await  tf.loadModel('http://localhost:3000/get-model').result;
-  return model;
+  
+  try {
+    const model = await tf.loadLayersModel(modelConfigURL);
+    return model;
+  } catch (error) {
+    console.error('Error loading the model:', error);
+    return null;
+  }
 }
 // Function to preprocess an image
 function preprocessImage(image) {
