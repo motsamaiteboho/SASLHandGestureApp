@@ -82,15 +82,46 @@ async function loadModel() {
     tf.ready().then(function () {
       // Now you can access tf.io
       model = tf.loadLayersModel(modelConfigURL);
-      console.log(myData);
   });
   //const model = await  tf.loadModel('http://localhost:3000/get-model').result;
   return model;
 }
-
-// Preprocess input image
+// Function to preprocess an image
 function preprocessImage(image) {
-  // Resize, normalize, and preprocess image here
+  // Create a canvas element to manipulate the image
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+
+  // Define the target size for your image (20x20 pixels)
+  var targetWidth = 20;
+  var targetHeight = 20;
+
+  // Set the canvas size to match the target size
+  canvas.width = targetWidth;
+  canvas.height = targetHeight;
+
+  // Draw the image onto the canvas and resize it
+  ctx.drawImage(image, 0, 0, targetWidth, targetHeight);
+
+  // Get the pixel data from the canvas
+  var imageData = ctx.getImageData(0, 0, targetWidth, targetHeight);
+
+  // Normalize and convert to grayscale (1 channel)
+  var inputBuffer = new Float32Array(targetWidth * targetHeight);
+  for (var i = 0; i < imageData.data.length / 4; i++) {
+    // Convert RGB to grayscale using luminance formula (0.2989 R + 0.5870 G + 0.1140 B)
+    var grayscaleValue =
+      0.2989 * imageData.data[i * 4] +
+      0.5870 * imageData.data[i * 4 + 1] +
+      0.1140 * imageData.data[i * 4 + 2];
+
+    // Normalize the pixel value to the range [0, 1]
+    inputBuffer[i] = grayscaleValue / 255;
+  }
+
+  // Create a tensor with shape [1, 20, 20, 1]
+  var preprocessedImage = tf.tensor([inputBuffer], [1, targetWidth, targetHeight, 1]);
+
   return preprocessedImage;
 }
 
