@@ -1,6 +1,6 @@
 // Get elements from the DOM
 //import * as tf from '@tensorflow/tfjs';
-import { loadLayersModel, io } from '@tensorflow/tfjs-node';
+//import { loadLayersModel, io } from '@tensorflow/tfjs-node';
 const gestureImage = document.getElementById('gesture-image');
 const captureBtn = document.getElementById('capture-btn');
 const video = document.getElementById('video');
