@@ -27,17 +27,23 @@ function displayRandomGesture() {
 }
 
 // Event listener for the "Capture Image" button
-captureBtn.addEventListener('click', () => {
+// Event listener for the "Capture Image" button
+captureBtn.addEventListener('click', async () => {
   setTimeout(() => {
     captureImage();
     setTimeout(async () => {
       const inputImage = document.getElementById('capturedImage'); // Get input image element
-      const predictions =  await predict( inputImage);
+
+      // Ensure the model is loaded before making predictions
+      const model = await loadModel();
+
+      const predictions = await predict(model, inputImage);
       feedBack.textContent = predictions;
-      displayRandomGesture(); 
+      displayRandomGesture();
     }, 1000);
   }, 1000);
 });
+
 
 displayRandomGesture();
 
@@ -124,9 +130,8 @@ function preprocessImage(image) {
   return preprocessedImage;
 }
 
-// Make predictions
-async function predict(inputImage) {
-  const model = await loadModel();
+// Function to preprocess an image and make predictions
+async function predict(model, inputImage) {
   const preprocessedImage = preprocessImage(inputImage);
   const predictions = await model.predict(preprocessedImage);
   // Get the class with the highest probability
