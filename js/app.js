@@ -77,24 +77,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const response = await fetch(modelConfigURL);
   const modelConfig = await response.json();
-  tf.ready().then(function () {
-    // Now you can access tf.io
-    const myData = tf.io.fromJSON(modelConfig);
-    console.log(myData);
-});
+  
   //const model = await loadModel();
   // You can store the model in a global variable or use it as needed
 });
 
 async function loadModel() {
   const modelConfigURL = 'http://localhost:3000/get-model';
-
-  const response = await fetch(modelConfigURL);
-    const modelConfig = await response.json();
-
-  const model = await tf.loadLayersModel(tf.io.fromJSON(JSON.stringify(modelConfig)));
+    const model = null;
+    tf.ready().then(function () {
+      // Now you can access tf.io
+      model = tf.loadLayersModel(modelConfigURL);
+      console.log(myData);
+  });
   //const model = await  tf.loadModel('http://localhost:3000/get-model').result;
- 
   return model;
 }
 
