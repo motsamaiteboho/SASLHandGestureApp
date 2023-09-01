@@ -127,8 +127,10 @@ function preprocessImage(image) {
 
 // Make predictions
 async function predict(model, inputImage) {
+  const model = await loadModel();
   const preprocessedImage = preprocessImage(inputImage);
-  const predictions = await model.predict(preprocessedImage).data();;
-  return predictions;
+  const predictions = await model.predict(preprocessedImage);
+  // Get the class with the highest probability
+  return predictions.argMax(1).dataSync()[0];
 }
 
