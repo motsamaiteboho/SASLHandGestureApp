@@ -78,14 +78,21 @@ function captureImage() {
 // Load the model once the page is loaded
 document.addEventListener('DOMContentLoaded', async () => {
    const model = await loadModel();
+   if (model) {
+    console.log('Layer names:', model.layers.map(layer => layer.name));
+  }
+  const model2 = await loadModel();
+   if (model2) {
+    console.log(model2.summary());
+   }
   // You can store the model in a global variable or use it as needed
 });
 
 async function loadModel() {
   const modelConfigURL = 'http://localhost:3000/get-model';
-  
   try {
     const model = await tf.loadLayersModel(modelConfigURL);
+    console.log('Model loaded successfully:', model);
     return model;
   } catch (error) {
     console.error('Error loading the model:', error);
