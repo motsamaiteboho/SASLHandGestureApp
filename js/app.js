@@ -31,9 +31,8 @@ captureBtn.addEventListener('click', () => {
   setTimeout(() => {
     captureImage();
     setTimeout(async () => {
-      const loadedModel = await loadModel();
       const inputImage = document.getElementById('capturedImage'); // Get input image element
-      const predictions =  await predict(loadedModel, inputImage);
+      const predictions =  await predict( inputImage);
       feedBack.textContent = predictions;
       displayRandomGesture(); 
     }, 1000);
@@ -126,7 +125,7 @@ function preprocessImage(image) {
 }
 
 // Make predictions
-async function predict(model, inputImage) {
+async function predict(inputImage) {
   const model = await loadModel();
   const preprocessedImage = preprocessImage(inputImage);
   const predictions = await model.predict(preprocessedImage);
