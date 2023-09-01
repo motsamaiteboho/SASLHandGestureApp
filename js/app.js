@@ -72,6 +72,7 @@ function captureImage() {
 
 // Load the model once the page is loaded
 document.addEventListener('DOMContentLoaded', async () => {
+  console.log(tf.version);
   const model = await loadModel();
   // You can store the model in a global variable or use it as needed
 });
