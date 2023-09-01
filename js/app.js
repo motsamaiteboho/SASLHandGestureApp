@@ -78,13 +78,13 @@ function captureImage() {
 // Load the model once the page is loaded
 document.addEventListener('DOMContentLoaded', async () => {
    const model = await loadModel();
-   if (model) {
-    console.log('Layer names:', model.layers.map(layer => layer.name));
-  }
-  const model2 = await loadModel();
-   if (model2) {
-    console.log(model2.summary());
-   }
+  //  if (model) {
+  //   console.log('Layer names:', model.layers.map(layer => layer.name));
+  // }
+  // const model2 = await loadModel();
+  //  if (model2) {
+  //   console.log(model2.summary());
+  //  }
   // You can store the model in a global variable or use it as needed
 });
 
@@ -142,9 +142,14 @@ function preprocessImage(image) {
 async function predict(model, inputImage) {
   try {
     const preprocessedImage = preprocessImage(inputImage);
-    const predictions = await model.predict(preprocessedImage);
-    // Get the class with the highest probability
-    return predictions.argMax(1).dataSync()[0];
+    console.log(preprocessImage);
+    if(model)
+    {
+      const predictions = await model.predict(preprocessedImage);
+      // Get the class with the highest probability
+      return predictions.argMax(1).dataSync()[0];
+    }
+    return null;
   } catch (error) {
     console.error('Error in predict function:', error);
     return null; // Return a placeholder or handle the error gracefully
